@@ -11,10 +11,11 @@ Parsing file can be found in `parse.py`
 
 Pickled model can be found in `model.pkl`
 
-## Expirementing
+#### Expirementing
 Using 1000 topics can be found in the `1000 topics testing` folder. 
 
 ## Latent Dirichlet Allocation (LDA) in Topic Modelling
+http://www.jmlr.org/papers/volume3/blei03a/blei03a.pdf
 ### Explanation
 In natural language processing (NLP) latent Dirichlet allocation is a generative statistical model. This means the model can extract topics in an unlabeled dataset by frequency and distribution of words, to extract topics. 
 
