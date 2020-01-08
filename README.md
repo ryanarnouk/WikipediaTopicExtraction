@@ -31,7 +31,7 @@ When using LDA you would choose a fixed number of topics (k) to discover from th
   - Documents are probability distributions over latent topics
   - Topics are probability distributions over words. 
 
-Instead of focusing purely on frequency of words in a topic LDA focuses also on the distribution between words accross topics.  
+Instead of focusing purely on frequency of words in a topic LDA focuses also on the distribution between words across topics.  
 
 
 ### Plate Notation
