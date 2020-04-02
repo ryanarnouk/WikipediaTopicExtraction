@@ -11,7 +11,7 @@ Parsing file can be found in `parse.py`
 
 Pickled model can be found in `model.pkl`
 
-#### Expirementing
+#### Experimenting
 Using 1000 topics can be found in the `1000 topics testing` folder. 
 
 ## Latent Dirichlet Allocation (LDA) in Topic Modelling
@@ -31,32 +31,32 @@ When using LDA you would choose a fixed number of topics (k) to discover from th
   - Documents are probability distributions over latent topics
   - Topics are probability distributions over words. 
 
-Instead of focusing purely on frequency of words in a topic LDA focuses also on the distribution between words across topics.  
+Instead of focusing purely on the frequency of words in a topic, LDA focuses also on the distribution between words across topics.  
 
 
 ### Plate Notation
-A simple way to visually represent all the dependencies in the models parameters: 
+A simple way to visually represent all the dependencies in the model's parameters: 
 
 ![Plate Notation](https://upload.wikimedia.org/wikipedia/commons/d/d3/Latent_Dirichlet_allocation.svg)
 
 By Bkkbrad - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=3610403
 
 
-M represents total number of documents within corpus 
+M represents the total number of documents within the corpus 
 
-N denotes number of words in a document
+N denotes the number of words in a document
 
 Outside parameters: 
-Dirchilet priors
+Dirichlet priors
 - α = the parameter of the Dirichlet prior on the per-document topic distributions
-    - High alpha denotes higher likelihood that each document is going to contain a mixture of the documents. 
+    - High alpha denotes a higher likelihood that each document is going to contain a mixture of the documents. 
     - Low alphas suggest that each document will only contain 1 or 2 topics
 - β = is the parameter of the Dirichlet prior on the per-topic word distribution
     - High beta means each topic will contain a mixture of most of the words
     - Low beta means each topic will only contain a mixture of a few words.      
 - Theta: Topic distribution for the document 
 - z notates each topic, making each document a mixture of these topics. 
-- w stands for word 
+- w stands for the word 
 
 <img src="https://miro.medium.com/max/800/1*_NdnljMqi8L2_lAYwH3JDQ.gif" alt="Dirichlet Distribution" width="500px" height="500px"/>
 
@@ -65,16 +65,16 @@ Dirchilet priors
 ### How LDA Works
 **LDA Works Backwards**
 
-LDA runs in reverse, by starting with a corpus of documents and generating topics. In order to understand how LDA assumes the documents topics it is important to understand the generative process: 
+LDA runs in reverse, by starting with a corpus of documents and generating topics. To understand how LDA assumes the topics of the documents it is important to understand the generative process: 
 
 LDA assumes documents are created in the same way: 
-1. Determine number of words in document
+1. Determine the number of words in the document
 2. Choose a topic mixture for the document over a fixed set of topics (k)
   a. Topic A: 20%
   b. Topic B: 20%
   c. Topic C: 60%
 3. Generate topics in a document by: 
-  a. First pick a topic a document in the topic distribution above. 
+  a. First, pick a topic for the document from the topic distribution above. 
   b. Pick a word based on the topic distribution. 
 
 Since we have a corpus of documents, we want LDA to learn the topic representation of K topics in each document and the word distribution of each topic. 
@@ -86,11 +86,11 @@ Steps:
 - For each document d: 
   - Assume all the topic assignments except the current one are correct
   - Calculate two proportions: 
-    - Proportion of words in document d that are currently assigned to topic t 
-    - Proportion of assignments to topic t over all documents that come from this word. 
+    - The proportion of words in document d that are currently assigned to topic t 
+    - The proportion of assignments to topic t over all documents that come from this word. 
 
   - Multiply the two proportions and assign w a new topic based on that probability. 
-- Eventually a state would be reached where assignments make sense. 
+- Eventually, a state would be reached where assignments make sense. 
 
 ### LDA Pros vs Cons
 
@@ -109,7 +109,7 @@ Cons:
 
 Difference between **identify one topic vs classify one topic**
 
-Originally, when working on this project I was under the impression I would use text classification and a neural network. However, I soon realized that this would be ineffective, based on the fact that despite having a define set of topic I would want to have returned I would not have any idea of the input text. Since I would have no idea what text or what subject the text inputted into the model would be, it would make more sense for me to try and extract the topic from any text instead of trying to classify an endless text from an endless amount of topics. If I was developing my model to be more niche in one subject, a neural network would definitely help improve my accuracy. 
+Originally, when working on this project I was under the impression I would use text classification and a neural network. However, I soon realized that this would be ineffective, based on the fact that despite having a defined set of topics I would want to have returned, I would not have any idea of the input text. Since I would have no idea what text or what subject the text inputted into the model would be, it would make more sense for me to try and extract the topic from any text instead of trying to classify an endless text from an endless amount of topics. If I was developing my model to be more niche in one subject, a neural network would help improve my accuracy. 
 
 Sources: 
 
@@ -133,7 +133,7 @@ The steps we need to do to preprocess our data is as follows:
 - All stop words are removed: Stop words are commonly used words like the, a, an, in that the classifier needs to be programmed to ignore to help keep noise levels in the classifier minimal. 
 - Capitalization: Lowercase all the data
 - Stemming: Remove suffixes from words. 
-- Lemmatization: Words in third person are changed to first person and verbs in past and future tenses are changed to present. 
+- Lemmatization: Words in the third person are changed to first person and verbs in past and future tenses are changed to present. 
 - Vectorization: Convert words to vectors. Machine Learning can only read numbers so we must translate it to numbers. 
   - Types of vectorization includes: 
     - Bag of words (the technology used in this project) 
@@ -143,13 +143,13 @@ The steps we need to do to preprocess our data is as follows:
 
 ### Vectorization 
 **Bag of Words** 
-Now we are able to vectorize the data: Vectorization is converting the words to numbers. 
+Now we can vectorize the data: Vectorization is converting the words to numbers. 
 
-Bag-of-words is a representation of text that describes the occurence of words in a document. Containing the following: 
+Bag-of-words is a representation of text that describes the occurrence of words in a document. Containing the following: 
 1. A vocabulary of known words. 
 2. A measure of the presence of known words. 
 
-It is called *bag* of words because information about order or structure is discarded and the model is simply concerned whether words occur in the document and not where in the document. 
+It is called *bag* of words because information about order or structure is discarded and the model is simply concerned whether words occur in the document and not where it appears in the document. 
 
 
 https://machinelearningmastery.com/gentle-introduction-bag-words-model/
@@ -178,9 +178,9 @@ workers = number of worker processed to be used for parallelization
 More information can be found here: 
 https://radimrehurek.com/gensim/models/ldamulticore.html
 
-Load into a pickle file to cache model and not need to rerun every time seperatly. 
+Load into a pickle file to cache model and not need to rerun every time separately. 
 
 **Selecting Parameters:**
-In my case I was limited in time to really expirement with tweaking all of the parameters, in the future instead of choosing something random and expirementing quickly to see what worked the best I will try and graph my results in order to see the best parameters that give me the most accurate results. Passing in an unseen document to the classifier and having no conclusive way to get the optimal number of topics really makes it a pain to tweak the parameters and becomes a game of trial and error. I ended up making this classifier with 350 topics and `model2.pkl` with 1000 topics and I am looking into expirementing with them to see what is more effective. 
+In my case, I was limited in time to experiment with tweaking all of the parameters, in the future instead of choosing something random and experimenting quickly to see what worked the best I will try and graph my results to see the best parameters that give me the most accurate results. Passing in an unseen document to the classifier and having no conclusive way to get the optimal number of topics makes it a pain to tweak the parameters and becomes a game of trial and error. I ended up making this classifier with 350 topics and `model2.pkl` with 1000 topics and I am looking into experimenting with them to see what is more effective. 
 
-Testing with 1000 topics expirement can be found in `/1000 topics testing`
+Testing with 1000 topics experiment can be found in `/1000 topics testing`
